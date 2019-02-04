@@ -1,0 +1,49 @@
+{
+  "lists": [
+    {
+      "list": "home",
+      "id": 1
+    },
+    {
+      "list": "work",
+      "id": 2
+    }
+  ],
+  "reminders": [
+    {
+      "todo": "mandatory training",
+      "completed": false,
+      "listId": 2,
+      "deadline": null,
+      "id": 1
+    },
+    {
+      "todo": "dental appointments",
+      "completed": false,
+      "listId": 1,
+      "deadline": null,
+      "id": 2
+    },
+    {
+      "todo": "check DL",
+      "completed": true,
+      "listId": 1,
+      "deadline": null,
+      "id": 3
+    },
+    {
+      "todo": "kk",
+      "completed": false,
+      "listId": 2,
+      "deadline": null,
+      "id": 4
+    },
+    {
+      "todo": "family doctor",
+      "completed": false,
+      "listId": 1,
+      "deadline": null,
+      "id": 5
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+<div *ngIf="atLeastOneCompleted">
+  <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseExample"
+    aria-expanded="false" aria-controls="collapseExample" (click)="showCompleted()">
+    {{showHide}}
+  </button>
+</div>
+
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    <div class="todo" *ngFor="let i of completed">
+      {{i.todo}}
+    </div>
+
+    <div *ngFor="let i of allCompleted">
+      <div class="todo" *ngIf="i.completed">
+        {{i.todo}}
+      </div>
+    </div>
+
+  </div>
+</div>

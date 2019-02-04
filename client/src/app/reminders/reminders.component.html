@@ -1,0 +1,38 @@
+<div class="container" *ngIf="atLeastOneList">
+  <div *ngIf="deleteMessage.length < 1">
+    <h1>List: {{listName}}</h1>
+
+    <form (submit)="createReminder()">
+      <div>
+        <input class="addReminder" type="text" [(ngModel)]="reminder.todo" name="todo" placeholder="Add Reminder">
+      </div>
+    </form>
+
+    <div *ngIf="reminders.length > 0">
+      <div *ngFor="let reminder of reminders let i = index">
+        <div *ngIf="!reminder.completed">
+          <div class="clicker">
+            <a (click)="toggle_visibility(i)"><input type="text" (blur)='editReminder(reminder.id, reminderContent.value)'
+                value={{reminder.todo}} #reminderContent></a>
+          </div>
+
+
+
+          <div [attr.id]=i class="hiddenDiv">
+            <input type="text" [(ngModel)]="reminder.deadline" (ngModelChange)="onChange(reminder.id, i)" placeholder="Set deadline"
+              bsDatepicker name="datepickerModel" autocomplete="off" />
+
+            <button (click)="completeReminder(reminder.id, i)" class="btn btn-outline-secondary">Complete</button>
+            <button (click)="deleteReminder(reminder.id, i)" class="btn btn-outline-danger">delete</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="deleteMessage.length > 0">
+  <h3>list {{deleteMessage}} is deleted</h3>
+</div>

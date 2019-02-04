@@ -1,0 +1,12 @@
+.card {
+    background-color: #f2f2f2;
+    padding: 0;
+    border: none;
+
+}
+
+.todo {
+    border: 1px solid #ddd;
+    padding: 0.5em;
+
+}

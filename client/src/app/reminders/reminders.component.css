@@ -1,0 +1,61 @@
+@media (min-width: 768px){
+    h1 {
+        padding: 20px;
+        background-color: rgb(233, 146, 126);
+        font-size: 40px;
+    }
+
+    .addReminder {
+        background-color: #f2f2f2;
+        padding: 13px;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 768px) {
+    h1 {
+        padding: 10px;
+        background-color: rgb(233, 146, 126);
+        font-size: 20px;
+    }
+
+    .addReminder {
+        background-color: #f2f2f2;
+        padding: 6px;
+        padding-left: 13px;
+    }
+
+    .hiddenDiv input {
+        width: 40%;
+    }
+  
+}
+
+.container{
+    border-collapse: collapse;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    background-color: #f2f2f2;
+    padding: 0;
+    border: 1px solid #ddd;
+}
+
+.clicker {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.clicker:hover {
+    background-color:#ddd;
+}
+
+input {
+    border: none;
+    outline:none;
+    padding: 10px;
+    background-color: transparent;
+}
+
+.hiddenDiv{
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease-out;
+}
