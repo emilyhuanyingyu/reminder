@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Subject } from "rxjs";
+import { Subject, throwError } from "rxjs";
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,13 @@ export class MainService {
   constructor(private http: HttpClient) { }
 
   fetchAllLists(){
-    return this.http.get(`http://localhost:5555/lists`)
+    return this.http.get(`http://localhost:3000/lists`)
+    .pipe(
+      map((res) => res),
+      catchError(err => {
+        return throwError(err);
+      })
+    )
   }
 
   fetchReminders(id){

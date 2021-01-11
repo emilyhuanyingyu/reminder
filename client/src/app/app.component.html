@@ -1,11 +1,18 @@
-<div class="father">
-    <div class='son container'>
-        <div class="left">
-            <app-lists></app-lists>
-        </div>
-        <div class="right">
-            <app-reminders></app-reminders>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <app-messages></app-messages>
+            <div class="father">
+                <div class='son container'>
+                    <div class="left">
+                        <app-lists></app-lists>
+                    </div>
+                    <div class="right">
+                        <app-reminders></app-reminders>
+                    </div>
+                </div>
+                <router-outlet></router-outlet>
+            </div>
         </div>
     </div>
-    <router-outlet></router-outlet>
 </div>

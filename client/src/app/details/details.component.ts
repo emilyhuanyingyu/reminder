@@ -48,7 +48,6 @@ export class DetailsComponent implements OnInit {
               this.completed.splice(i, 1);
             }
           }
-          console.log("completed",this.completed);
         }
       }
     })

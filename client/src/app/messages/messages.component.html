@@ -1,0 +1,8 @@
+<ng-container *ngIf="(messagesService.errors$ | async) as errors">
+    <div  class="alert alert-danger message_container" role="alert" *ngIf="showMessages">
+        <div class="message" *ngFor="let error of errors">
+            {{error}}
+        </div>
+        <!-- <div click="onClose()">close</div> -->
+    </div>
+</ng-container>

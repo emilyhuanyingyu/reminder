@@ -70,7 +70,6 @@ export class RemindersComponent implements OnInit {
           }
         }
         this.service.fetchReminders(this.listId).subscribe((data: any) => {
-          // console.log(data);
         })
         if (this.listId == 0) {
           this.atLeastOneList = false;

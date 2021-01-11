@@ -10,6 +10,7 @@ import { MainService } from "./main.service";
 import { RemindersComponent } from './reminders/reminders.component';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MessagesComponent } from './messages/messages.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     ListsComponent,
     DetailsComponent,
-    RemindersComponent
+    RemindersComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

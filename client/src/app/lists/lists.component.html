@@ -1,9 +1,10 @@
 <div class="container">
     <form class="addList" (submit)="createList()">
-        <input type="text" [(ngModel)]="createdlist.list" name="list" placeholder="Add List">
+        <input type="text" [(ngModel)]="createdlist.list" name="list" placeholder="Add List"
+        autocomplete="off">
     </form>
 
-    <div *ngIf="lists.length">
+    <div *ngIf="lists && lists.length">
         <div class="lists" *ngFor="let list of lists let i = index">
             <div class="left" (click)="showReminders(list.id)">
                 <form (submit)="editList(list.id, listContent.value)">

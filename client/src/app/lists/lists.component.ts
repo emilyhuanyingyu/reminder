@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { MainService } from "../main.service";
+import { MessagesService } from '../messages.service';
 
 @Component({
   selector: 'app-lists',
@@ -7,7 +10,7 @@ import { MainService } from "../main.service";
   styleUrls: ['./lists.component.css']
 })
 export class ListsComponent implements OnInit {
-  lists = [];
+  lists: any;
   createdlist = {
     list: ''
   };
@@ -16,50 +19,61 @@ export class ListsComponent implements OnInit {
     "list": ''
   }
 
-  constructor(private service: MainService) { }
+  constructor(
+    private mainService: MainService,
+    private messagesService: MessagesService
+  ) { }
 
   ngOnInit() {
     this.fetchAllLists();
   }
 
   fetchAllLists() {
-    this.service.fetchAllLists().subscribe((data: any) => {
-      this.lists = data;
-      if (this.lists.length > 0) {
-        this.service.listId.next(this.lists[0].id);
-      }
-    })
+    this.mainService.fetchAllLists()
+    .pipe(
+      map(data => {
+        this.lists = data;
+        if (this.lists.length > 0) {
+          this.mainService.listId.next(this.lists[0].id);
+        }
+      }),
+      catchError(error => {
+        const message = 'We are having technical errors.';
+        this.messagesService.showErrors(message);
+        return throwError(error); 
+      })
+    ).subscribe((data: any) => {})
   }
 
   showReminders(id) {
-    this.service.fetchReminders(id).subscribe((data) => {
-      this.service.lists.next(data);
+    this.mainService.fetchReminders(id).subscribe((data) => {
+      this.mainService.lists.next(data);
     })
-    this.service.listId.next(id);
+    this.mainService.listId.next(id);
 
     for (var i = 0; i < this.lists.length; i++) {
       if (this.lists[i].id == id) {
-        this.service.listName.next(this.lists[i].list);
+        this.mainService.listName.next(this.lists[i].list);
       }
     }
   }
 
   createList() {
     if (this.createdlist.list.length > 0) {
-      this.service.addList(this.createdlist).subscribe((data: any) => {
-        this.service.atLeastOneList.next(data.list);
+      this.mainService.addList(this.createdlist).subscribe((data: any) => {
+        this.mainService.atLeastOneList.next(data.list);
         this.lists.push(data);
-        this.service.listId.next(data.id);
-        this.service.listName.next(data.list);
+        this.mainService.listId.next(data.id);
+        this.mainService.listName.next(data.list);
       })
       this.createdlist.list = "";
     }
   }
 
   deleteList(listId, index) {
-    this.service.deleteList(listId).toPromise().then((data) => {
-      this.service.deleteMessage.next(this.lists[index].list);
-      this.service.deletedListId.next(this.lists[index].id);
+    this.mainService.deleteList(listId).toPromise().then((data) => {
+      this.mainService.deleteMessage.next(this.lists[index].list);
+      this.mainService.deletedListId.next(this.lists[index].id);
 
       if (this.lists.length > 1) {
         if (index == this.lists.length - 1) {
@@ -75,7 +89,7 @@ export class ListsComponent implements OnInit {
       if (this.lists.length == 1) {
         this.showReminders(this.lists[0].id);
         this.lists.splice(index, 1);
-        this.service.delList.next(0);
+        this.mainService.delList.next(0);
         return;
       }
     })
@@ -86,9 +100,8 @@ export class ListsComponent implements OnInit {
       "id": listId,
       "list": editedList
     }
-    this.service.editList(listId, this.editedList).subscribe((data: any) => {
-      console.log(data);
-      this.service.listName.next(data.list)
+    this.mainService.editList(listId, this.editedList).subscribe((data: any) => {
+      this.mainService.listName.next(data.list)
     })
   }
 }
